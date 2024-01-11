@@ -4,17 +4,12 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import IconButton from '@mui/material/IconButton';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
 import { Link } from 'react-router-dom';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import VpnKeyIcon from '@mui/icons-material/VpnKey';
-const LogoComponent = () => (
-  <img
-    src="./img/logo2.png" // Replace with the actual path to your logo
-    alt="Logo"
-    style={{ height: '40px', marginRight: '10px' }}
-  />
-);
 
 const Navbar = () => {
   const [productMenuAnchor, setProductMenuAnchor] = React.useState(null);
@@ -29,42 +24,47 @@ const Navbar = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ background: '#FEE7AA' /* Set your desired color here */ }}>
+      <AppBar position="static" sx={{ background: '#2E3B4E' /* Set your desired background color here */ }}>
         <Toolbar>
-        <LogoComponent />
-        <Typography
-  variant="h6"
-  component="div"
-  sx={{
-    flexGrow: 1,
-    color: '#AA4C0A', // Set text color
-    fontFamily: 'cursive', // Set font family
-    fontWeight: 'bold', // Set font weight
-    letterSpacing: '1px', // Set letter spacing
-    textTransform: 'uppercase', // Convert text to uppercase
-    fontSize: '1.2rem', // Set font size
-    // Add more styles as needed
-  }}
->
-  LUMINOUS
-</Typography>
-
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: '#FFFFFF' /* Set text color */ }}>
+            Admin Panel
+          </Typography>
           
-
           
-          <Button variant='text' color="success">
-            <Link to={'/Register'} style={{ textDecoration: 'none', color: '#AA4C0A' }}>
-              <AccountCircleIcon sx={{ marginRight: 1 }} />
-              Signup
-            </Link>
+          <Button component={Link} to="/dashboard" color="inherit">
+            Dashbaord
           </Button>
 
-          <Button variant='text' color="success">
-            <Link to={'/Login'} style={{ textDecoration: 'none', color: '#AA4C0A' }}>
-              <VpnKeyIcon sx={{ marginRight: 1 }} />
-              Login
-            </Link>
-          </Button>
+          <IconButton
+            size="large"
+            edge="end"
+            color="inherit"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleProductMenuOpen}
+          >
+            <AccountCircle />
+          </IconButton>
+          
+          <Menu
+            id="menu-appbar"
+            anchorEl={productMenuAnchor}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(productMenuAnchor)}
+            onClose={handleProductMenuClose}
+          >
+            <MenuItem onClick={handleProductMenuClose}>Profile</MenuItem>
+            <MenuItem onClick={handleProductMenuClose}>Logout</MenuItem>
+          </Menu>
         </Toolbar>
       </AppBar>
     </Box>
